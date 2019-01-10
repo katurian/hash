@@ -1,0 +1,36 @@
+library(tidyverse)
+library(rtweet)
+library(twitteR)
+library(ggplot2)
+library(tidytext)
+library(dplyr)
+library(stringr)
+library(lubridate)
+
+# first we search for tweets
+
+broma <- search_tweets(
+    "broma", n = 18000, include_rts = FALSE
+)
+
+# broma is spanish for "joke"
+
+trump <- search_tweets(
+    "trump", n = 18000, include_rts = FALSE
+)
+
+broma$query <- "broma"
+trump$query <- "trump"
+
+# here we add a new variable column to the data frames "broma" and "trump". this will help group_by() distinguish the tweets once we bind them into one data frame
+
+br_tr <- rbind(broma, trump)
+
+ts_plot(by = "hours", dplyr::group_by(br_tr, query)) +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
+  ggplot2::labs(
+    x = NULL, y = NULL,
+    color = NULL,
+    title = "TITLE GOES HERE",
+    subtitle = "Data collected from Twitter's REST API via rtweet")
