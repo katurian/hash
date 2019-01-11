@@ -43,11 +43,15 @@ tweets_tokened <- anti_join(tweets_tokened, mystopwords, by = "word")
 
 tweets_tokened %>%
   count(word, sort = TRUE) %>%
-  filter(n > 500, n < 5000) %>%
+  filter(n > 1700, n < 5000) %>%
   mutate(word = reorder(word, n)) %>%
   ggplot(aes(word, n)) +
   geom_col() +
   xlab(NULL) +
+  ylab(NULL) +
+  ggtitle("Common Words In #Trump", subtitle = "Data collected from Twitter's REST API via rtweet") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(plot.subtitle = element_text(hjust = 0.5)) +
   coord_flip()
 
 # this visualizes the most common words
