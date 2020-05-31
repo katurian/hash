@@ -30,7 +30,7 @@ tweets_text <- gsub("https.*","",tweets_text)
 # this narrows the data frame down to just the text, and cleans the data
 
 tweets_tokened <- tweets_text %>%
-     as.tibble %>% 
+     as_tibble %>% 
      unnest_tokens(word, value) %>%
      anti_join(stop_words)
 
