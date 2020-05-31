@@ -36,7 +36,7 @@ tweets_tokened <- tweets_text %>%
 
 # this "tokenizes" the tweets into individual words and removes the most common/uninteresting words
 
-mystopwords <- data_frame(word = c("rt", "succ", "he's", "it's", "op", "ed"))
+mystopwords <- tibble(word = c("rt", "succ", "he's", "it's", "op", "ed"))
 tweets_tokened <- anti_join(tweets_tokened, mystopwords, by = "word")
 
 # remember you can make your own list of words to be removed from your corpus
